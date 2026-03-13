@@ -14,7 +14,6 @@ const Footer = () => {
     <footer className="w-full py-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 transition-colors">
       <div className="max-w-5xl mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-      
           <div className="space-y-2 text-center md:text-left">
             <Link
               href="/"
@@ -54,7 +53,6 @@ const Footer = () => {
             </Link>
           </nav>
 
-        
           <div className="flex items-center gap-4">
             <div className="flex gap-4 border-r border-slate-200 dark:border-slate-800 pr-4">
               <Link
@@ -66,7 +64,8 @@ const Footer = () => {
               </Link>
               <Link
                 href="
-https://www.linkedin.com/in/abdo-abdo-546450331"
+
+https://www.linkedin.com/in/abdelrahman-ibrahiem-elshiekh-aa01643b7"
                 target="_blank"
                 className="text-slate-500 hover:text-blue-600 transition-colors"
               >
@@ -84,7 +83,6 @@ https://www.linkedin.com/in/abdo-abdo-546450331"
           </div>
         </div>
 
-       
         <div className="mt-12 pt-8 border-t border-slate-100 dark:border-slate-900/50 flex flex-col items-center gap-2">
           <p className="text-xs text-slate-500 flex items-center gap-1">
             Built with <Heart size={12} className="text-red-500 fill-red-500" />{" "}

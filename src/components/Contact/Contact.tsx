@@ -57,10 +57,10 @@ const Contact = () => {
                   Email Me
                 </p>
                 <a
-                  href="mailto:aabbnddoo@gmail.com"
+                  href="mailto:abdelrahman.ibrahiem.elshiekh@gmail.com"
                   className="text-lg font-medium hover:text-blue-600 transition-colors"
                 >
-                  aabbnddoo@gmail.com
+                  abdelrahman.ibrahiem.elshiekh@gmail.com
                 </a>
               </div>
             </motion.div>
@@ -91,7 +91,8 @@ const Contact = () => {
                     whileHover={{ scale: 1.2, rotate: -5 }}
                     whileTap={{ scale: 0.9 }}
                     target="_blank"
-                    href="https://www.linkedin.com/in/abdo-abdo-546450331"
+                    href="
+https://www.linkedin.com/in/abdelrahman-ibrahiem-elshiekh-aa01643b7"
                     className="hover:text-blue-600 transition-colors"
                   >
                     <Linkedin size={20} />

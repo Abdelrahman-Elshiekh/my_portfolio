@@ -54,7 +54,8 @@ const Navbar = () => {
             <Link
               className="hover:text-blue-600"
               href="
-https://www.linkedin.com/in/abdo-abdo-546450331"
+
+https://www.linkedin.com/in/abdelrahman-ibrahiem-elshiekh-aa01643b7"
               target="_blank"
             >
               <Linkedin size={35} />
