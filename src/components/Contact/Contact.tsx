@@ -2,14 +2,39 @@
 
 import { Mail, MessageSquare, Github, Linkedin } from "lucide-react";
 import ContactForm from "../Contactform/Contactform";
-import { useSession } from "next-auth/react";
+import { motion, Variants, easeOut } from "framer-motion";
 
 const Contact = () => {
+  
+  const fadeInLeft: Variants = {
+   hidden: { opacity: 0, x: -40 },
+   visible: {
+     opacity: 1,
+     x: 0,
+     transition: { duration: 0.8, ease: easeOut }, // ✅ use imported easing
+   },
+ };
+
+  const fadeInRight: Variants = {
+   hidden: { opacity: 0, x: 40 },
+   visible: {
+     opacity: 1,
+     x: 0,
+     transition: { duration: 0.8, ease: easeOut, delay: 0.2 }, // ✅ also works with delay
+   },
+ };
+
   return (
-    <section id="contact" className="pt-24 pb-32 scroll-mt-20">
+    <section id="contact" className="pt-24 pb-32 scroll-mt-20 overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Left Side: Contact Info */}
-        <div className="space-y-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={fadeInLeft}
+          className="space-y-8"
+        >
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
             Let&apos;s <span className="text-blue-600">Connect.</span>
           </h2>
@@ -19,8 +44,12 @@ const Contact = () => {
           </p>
 
           <div className="space-y-6">
-            <div className="flex items-center gap-4 group">
-              <div className="p-3 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all">
+            {/* Email Row */}
+            <motion.div
+              whileHover={{ x: 10 }}
+              className="flex items-center gap-4 group cursor-pointer"
+            >
+              <div className="p-3 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
                 <Mail size={24} />
               </div>
               <div>
@@ -34,10 +63,14 @@ const Contact = () => {
                   aabbnddoo@gmail.com
                 </a>
               </div>
-            </div>
+            </motion.div>
 
-            <div className="flex items-center gap-4 group">
-              <div className="p-3 rounded-2xl bg-purple-50 dark:bg-purple-900/20 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-all">
+            {/* Socials Row */}
+            <motion.div
+              whileHover={{ x: 10 }}
+              className="flex items-center gap-4 group"
+            >
+              <div className="p-3 rounded-2xl bg-purple-50 dark:bg-purple-900/20 text-purple-600 group-hover:bg-purple-600 group-hover:text-white transition-all shadow-sm">
                 <MessageSquare size={24} />
               </div>
               <div>
@@ -45,28 +78,39 @@ const Contact = () => {
                   Socials
                 </p>
                 <div className="flex gap-4 mt-1">
-                  <a
+                  <motion.a
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    whileTap={{ scale: 0.9 }}
                     href="https://github.com/Abdelrahman-Elshiekh"
+                    target="_blank"
                     className="hover:text-blue-600 transition-colors"
                   >
                     <Github size={20} />
-                  </a>
-                  <a
-                  target="_blank"
-                    href="
-https://www.linkedin.com/in/abdo-abdo-546450331"
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.2, rotate: -5 }}
+                    whileTap={{ scale: 0.9 }}
+                    target="_blank"
+                    href="https://www.linkedin.com/in/abdo-abdo-546450331"
                     className="hover:text-blue-600 transition-colors"
                   >
                     <Linkedin size={20} />
-                  </a>
+                  </motion.a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Right Side: Contact Form */}
-        <ContactForm />
+        {/* Right Side: Contact Form Wrapper */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: false, amount: 0.3 }}
+          variants={fadeInRight}
+        >
+          <ContactForm />
+        </motion.div>
       </div>
     </section>
   );

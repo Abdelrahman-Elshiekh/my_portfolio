@@ -3,10 +3,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Send, AlertCircle } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { Send, AlertCircle, CheckCircle2 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion"; // Added AnimatePresence for smooth error messages
 
-// 1. Validation Schema
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
@@ -20,37 +19,57 @@ const ContactForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
     reset,
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
-    try {
-      const response = await fetch("https://formspree.io/f/xojkddjk", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+ const onSubmit = async (data: ContactFormData) => {
+   try {
+     
+     const response = await fetch("/api/contact", {
+       method: "POST",
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify(data),
+     });
 
-      if (response.ok) {
-        alert("Message sent successfully!");
-        reset();
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong. Please try again.");
-    }
+     if (response.ok) {
+       reset();
+      
+     } else {
+       alert("Something went wrong. Please try again.");
+     }
+   } catch (err) {
+     console.error(err);
+     alert("Something went wrong. Please try again.");
+   }
+ };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: { opacity: 1, x: 0 },
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false }}
+      className="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl"
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        {/* Name */}
-        <div className="space-y-2">
+        {/* Name Input */}
+        <motion.div variants={itemVariants} className="space-y-2">
           <label className="text-sm font-medium">Name</label>
           <input
             {...register("name")}
@@ -61,15 +80,22 @@ const ContactForm = () => {
                 : "border-slate-200 dark:border-slate-800"
             } bg-slate-50 dark:bg-slate-950 outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
-          {errors.name && (
-            <p className="text-red-500 text-xs flex items-center gap-1">
-              <AlertCircle size={12} /> {errors.name.message}
-            </p>
-          )}
-        </div>
+          <AnimatePresence>
+            {errors.name && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="text-red-500 text-xs flex items-center gap-1"
+              >
+                <AlertCircle size={12} /> {errors.name.message}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
-        {/* Email */}
-        <div className="space-y-2">
+        {/* Email Input */}
+        <motion.div variants={itemVariants} className="space-y-2">
           <label className="text-sm font-medium">Email</label>
           <input
             {...register("email")}
@@ -80,15 +106,22 @@ const ContactForm = () => {
                 : "border-slate-200 dark:border-slate-800"
             } bg-slate-50 dark:bg-slate-950 outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
-          {errors.email && (
-            <p className="text-red-500 text-xs flex items-center gap-1">
-              <AlertCircle size={12} /> {errors.email.message}
-            </p>
-          )}
-        </div>
+          <AnimatePresence>
+            {errors.email && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="text-red-500 text-xs flex items-center gap-1"
+              >
+                <AlertCircle size={12} /> {errors.email.message}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
-        {/* Subject */}
-        <div className="space-y-2">
+        {/* Subject Input */}
+        <motion.div variants={itemVariants} className="space-y-2">
           <label className="text-sm font-medium">Subject</label>
           <input
             {...register("subject")}
@@ -99,15 +132,22 @@ const ContactForm = () => {
                 : "border-slate-200 dark:border-slate-800"
             } bg-slate-50 dark:bg-slate-950 outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
-          {errors.subject && (
-            <p className="text-red-500 text-xs flex items-center gap-1">
-              <AlertCircle size={12} /> {errors.subject.message}
-            </p>
-          )}
-        </div>
+          <AnimatePresence>
+            {errors.subject && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="text-red-500 text-xs flex items-center gap-1"
+              >
+                <AlertCircle size={12} /> {errors.subject.message}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
-        {/* Message */}
-        <div className="space-y-2">
+        {/* Message Input */}
+        <motion.div variants={itemVariants} className="space-y-2">
           <label className="text-sm font-medium">Message</label>
           <textarea
             {...register("message")}
@@ -119,23 +159,52 @@ const ContactForm = () => {
                 : "border-slate-200 dark:border-slate-800"
             } bg-slate-50 dark:bg-slate-950 outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none`}
           />
-          {errors.message && (
-            <p className="text-red-500 text-xs flex items-center gap-1">
-              <AlertCircle size={12} /> {errors.message.message}
-            </p>
-          )}
-        </div>
+          <AnimatePresence>
+            {errors.message && (
+              <motion.p
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                className="text-red-500 text-xs flex items-center gap-1"
+              >
+                <AlertCircle size={12} /> {errors.message.message}
+              </motion.p>
+            )}
+          </AnimatePresence>
+        </motion.div>
 
-        <button
+        {/* Submit Button */}
+        <motion.button
+          variants={itemVariants}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           type="submit"
           disabled={isSubmitting}
-          className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-400 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all"
+          className={`w-full py-4 font-bold rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg ${
+            isSubmitSuccessful
+              ? "bg-green-600 hover:bg-green-700 text-white"
+              : "bg-blue-600 hover:bg-blue-700 text-white disabled:bg-slate-400"
+          }`}
         >
-          {isSubmitting ? "Sending..." : "Send Message"}
-          <Send size={18} />
-        </button>
+          {isSubmitting ? (
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+            >
+              <Send size={18} />
+            </motion.div>
+          ) : isSubmitSuccessful ? (
+            <>
+              Message Sent <CheckCircle2 size={18} />
+            </>
+          ) : (
+            <>
+              Send Message <Send size={18} />
+            </>
+          )}
+        </motion.button>
       </form>
-    </div>
+    </motion.div>
   );
 };
 
