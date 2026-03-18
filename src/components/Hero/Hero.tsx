@@ -11,7 +11,7 @@ const Hero = () => {
       id="hero"
       className="relative w-full min-h-[90vh] flex flex-col items-center justify-center text-center lg:text-left pt-20 pb-16 overflow-hidden"
     >
-      {/* 1. Custom CSS Animations */}
+     
       <style jsx>{`
         @keyframes fadeInUp {
           from {
@@ -62,12 +62,12 @@ const Hero = () => {
         }
       `}</style>
 
-      {/* Background Decorative Blobs */}
-      <div className="absolute top-1/4 -left-20 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl -z-10 animate-pulse" />
-      <div className="absolute bottom-1/4 -right-20 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl -z-10 animate-pulse delay-700" />
+      
+      <div className="absolute top-1/4 -left-20 w-full h-72 bg-blue-400/20 rounded-full blur-3xl -z-10 animate-pulse" />
+      <div className="absolute bottom-1/4 -right-20 w-full h-72 bg-purple-400/20 rounded-full blur-3xl -z-10 animate-pulse delay-700" />
 
       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Left Side: Text Content */}
+        
         <div className="space-y-9 max-w-3xl order-2 lg:order-1">
           <span className="animate-fade-in-up opacity-0 px-4 py-1.5 rounded-full border border-slate-200 dark:border-slate-800 text-sm font-medium bg-slate-50/50 dark:bg-slate-900/50">
             Available for new projects

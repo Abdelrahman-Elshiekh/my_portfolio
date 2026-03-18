@@ -14,10 +14,9 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-between">
         <Navbar />
 
-        
-        <div className="w-full    px-6 md:px-10">
-          <div className=" md:w-3/4 md:m-auto">
-            <Hero />
+        <div className="w-full   ">
+          <Hero />
+          <div className="px-12">
             <About />
             <Skills />
             <Projects />
