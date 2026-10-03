@@ -11,7 +11,6 @@ const Hero = () => {
       id="hero"
       className="relative w-full min-h-[90vh] flex flex-col items-center justify-center text-center lg:text-left pt-20 pb-16 overflow-hidden"
     >
-     
       <style jsx>{`
         @keyframes fadeInUp {
           from {
@@ -62,12 +61,10 @@ const Hero = () => {
         }
       `}</style>
 
-      
       <div className="absolute top-1/4 -left-20 w-full h-72 bg-blue-400/20 rounded-full blur-3xl -z-10 animate-pulse" />
       <div className="absolute bottom-1/4 -right-20 w-full h-72 bg-purple-400/20 rounded-full blur-3xl -z-10 animate-pulse delay-700" />
 
       <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        
         <div className="space-y-9 max-w-3xl order-2 lg:order-1">
           <span className="animate-fade-in-up opacity-0 px-4 py-1.5 rounded-full border border-slate-200 dark:border-slate-800 text-sm font-medium bg-slate-50/50 dark:bg-slate-900/50">
             Available for new projects
@@ -88,7 +85,7 @@ const Hero = () => {
 
           <div className="animate-fade-in-up opacity-0 delay-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
             <Link
-              href="/resume.pdf"
+              href="/abdelrahman_elshiekh_resume.pdf"
               target="_blank"
               className="group flex justify-center items-center gap-2 px-9 py-4 rounded-full border border-slate-200 dark:border-slate-800 font-medium hover:bg-slate-50 dark:hover:bg-slate-900 transition-all text-xl active:scale-95"
             >
